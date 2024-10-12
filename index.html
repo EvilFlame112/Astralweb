@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Space Timeline</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #20232a;
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .event {
+            background: #333;
+            padding: 20px;
+            border-radius: 5px;
+            transition: transform 0.2s;
+        }
+
+        .event:hover {
+            transform: scale(1.03);
+        }
+
+        button {
+            background: #61dafb;
+            color: #20232a;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #21a1f1;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            margin: 15% auto;
+            color: black;
+            border-radius: 5px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Interactive Space Timeline</h1>
+        <p>Explore the past, present, and future of space exploration</p>
+    </header>
+    <main>
+        <section id="timeline">
+            <div class="event" data-year="1969">
+                <h2>Moon Landing</h2>
+                <p>Neil Armstrong becomes the first human to walk on the Moon.</p>
+                <button onclick="showDetails('1969')">Details</button>
+            </div>
+            <div class="event" data-year="1977">
+                <h2>Voyager 1 Launched</h2>
+                <p>NASA launches Voyager 1 to explore the outer planets.</p>
+                <button onclick="showDetails('1977')">Details</button>
+            </div>
+            <div class="event" data-year="1981">
+                <h2>First Space Shuttle Launch</h2>
+                <p>STS-1 marks the first flight of the Space Shuttle program.</p>
+                <button onclick="showDetails('1981')">Details</button>
+            </div>
+            <div class="event" data-year="1990">
+                <h2>Hubble Space Telescope Launched</h2>
+                <p>The Hubble Space Telescope is launched into low Earth orbit.</p>
+                <button onclick="showDetails('1990')">Details</button>
+            </div>
+            <div class="event" data-year="1997">
+                <h2>Spirit and Opportunity Land on Mars</h2>
+                <p>NASA lands rovers Spirit and Opportunity on Mars.</p>
+                <button onclick="showDetails('1997')">Details</button>
+            </div>
+            <div class="event" data-year="2000">
+                <h2>International Space Station Assembly Begins</h2>
+                <p>The first module of the ISS is launched into orbit.</p>
+                <button onclick="showDetails('2000')">Details</button>
+            </div>
+            <div class="event" data-year="2004">
+                <h2>Success of Mars Exploration Rovers</h2>
+                <p>Rovers Spirit and Opportunity exceed their mission expectations.</p>
+                <button onclick="showDetails('2004')">Details</button>
+            </div>
+            <div class="event" data-year="2008">
+                <h2>Launch of the Phoenix Mars Lander</h2>
+                <p>Phoenix successfully lands on Mars to search for water.</p>
+                <button onclick="showDetails('2008')">Details</button>
+            </div>
+            <div class="event" data-year="2012">
+                <h2>Curiosity Rover Lands on Mars</h2>
+                <p>Curiosity rover lands on Mars to investigate past life.</p>
+                <button onclick="showDetails('2012')">Details</button>
+            </div>
+            <div class="event" data-year="2014">
+                <h2>Rosetta Spacecraft Reaches Comet</h2>
+                <p>Rosetta becomes the first spacecraft to orbit a comet.</p>
+                <button onclick="showDetails('2014')">Details</button>
+            </div>
+            <div class="event" data-year="2016">
+                <h2>OSIRIS-REx Launch</h2>
+                <p>NASA launches OSIRIS-REx to collect samples from asteroid Bennu.</p>
+                <button onclick="showDetails('2016')">Details</button>
+            </div>
+            <div class="event" data-year="2018">
+                <h2>InSight Landing on Mars</h2>
+                <p>NASA's InSight lander touches down on Mars to study its geology.</p>
+                <button onclick="showDetails('2018')">Details</button>
+            </div>
+            <div class="event" data-year="2020">
+                <h2>Perseverance Rover and Ingenuity Helicopter</h2>
+                <p>Perseverance rover and the Ingenuity helicopter successfully land on Mars.</p>
+                <button onclick="showDetails('2020')">Details</button>
+            </div>
+            <div class="event" data-year="2021">
+                <h2>James Webb Space Telescope Launch</h2>
+                <p>The JWST successfully launches to replace Hubble Space Telescope.</p>
+                <button onclick="showDetails('2021')">Details</button>
+            </div>
+            <div class="event" data-year="2023">
+                <h2>Artemis I Mission</h2>
+                <p>A multi-phase mission aimed at returning humans to the Moon.</p>
+                <button onclick="showDetails('2023')">Details</button>
+            </div>
+            <div class="event" data-year="2024">
+                <h2>Artemis II Crewed Mission</h2>
+                <p>Planned crewed mission around the Moon as part of the Artemis program.</p>
+                <button onclick="showDetails('2024')">Details</button>
+            </div>
+            <div class="event" data-year="2025">
+                <h2>Planned Lunar Gateway Development</h2>
+                <p>The development of the Lunar Gateway as a hub for lunar exploration.</p>
+                <button onclick="showDetails('2025')">Details</button>
+            </div>
+            <div class="event" data-year="2028">
+                <h2>First Artemis Landing on Moon</h2>
+                <p>The first crewed landing on the Moon under the Artemis program.</p>
+                <button onclick="showDetails('2028')">Details</button>
+            </div>
+            <div class="event" data-year="2030">
+                <h2>First Mars Sample Return Mission</h2>
+                <p>NASA plans to return samples collected by the Perseverance rover from Mars.</p>
+                <button onclick="showDetails('2030')">Details</button>
+            </div>
+        </section>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <p id="modal-text"></p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Space Timeline Project</p>
+    </footer>
+    <script>
+        const eventDetails = {
+            '1969': 'The Apollo 11 mission marks a significant achievement in human history with Neil Armstrong and Buzz Aldrin walking on the lunar surface.',
+            '1977': 'Voyager 1 has provided breathtaking images and data about the outer planets and is now in interstellar space.',
+            '1981': 'STS-1 marks the first flight of the Space Shuttle program, facilitating easier access to space.',
+            '1990': 'The Hubble Space Telescope revolutionizes our understanding of the universe with its stunning imagery.',
+            '1997': 'NASA lands rovers Spirit and Opportunity on Mars, sending back invaluable data about the Martian terrain.',
+            '2000': 'The first module of the International Space Station is launched, marking a new era of international cooperation in space.',
+            '2004': 'Rovers Spirit and Opportunity exceed their mission expectations, significantly improving our knowledge of Mars.',
+            '2008': 'Phoenix successfully lands on Mars, searching for water and other signs of past life.',
+            '2012': 'Curiosity rover lands on Mars to investigate whether the planet has ever been capable of supporting microbial life.',
+            '2014': 'Rosetta becomes the first spacecraft to orbit a comet and land on it, marking a historic achievement in space exploration.',
+            '2016': 'NASA launches OSIRIS-REx to collect samples from asteroid Bennu and return them to Earth for study.',
+            '2018': 'NASA\'s InSight lander touches down on Mars to study its geology and seismic activity.',
+            '2020': 'Perseverance rover and the Ingenuity helicopter successfully land on Mars, exploring the planet and demonstrating powered flight.',
+            '2021': 'The James Webb Space Telescope successfully launches, promising to unveil the mysteries of the universe.',
+            '2023': 'The Artemis I mission prepares for a return to the Moon, an essential step for future lunar exploration.',
+            '2024': 'Artemis II is planned as a crewed mission around the Moon, building on the successes of Artemis I.',
+            '2025': 'The Lunar Gateway is set to be developed, serving as a hub for lunar exploration and future Mars missions.',
+            '2028': 'Under the Artemis program, the first crewed lunar landing is anticipated, bringing humanity back to the Moon.',
+            '2030': 'NASA aims to return samples collected by the Perseverance rover from Mars, significantly advancing our Martian research.'
+        };
+
+        function showDetails(year) {
+            document.getElementById('modal-text').innerText = eventDetails[year];
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside of modal
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
